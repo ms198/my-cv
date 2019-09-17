@@ -3,19 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 
-const index = {
+const indexRoute = {
     path: '',
-    component: HomeComponent,
+    redirectTo: 'home',
     pathMatch: 'full'
 };
 
-const fallback = {
+const fallbackRoute = {
     path: '**',
     component: PageNotFoundComponent
 };
 
 const appRoutes: Routes = [
-    index,
+  indexRoute,  
+    {
+      path: 'home',
+      component:HomeComponent
+    },
     {
         path: 'angular',
         loadChildren: './angular/angular.module#AngularModule'
@@ -24,7 +28,7 @@ const appRoutes: Routes = [
       path: 'javascript',
       loadChildren: './javascript/javascript.module#JavascriptModule'
     },
-    fallback
+  fallbackRoute,
 ];
 
 @NgModule({
