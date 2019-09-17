@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/page-not-found.component';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 const index = {
     path: '',
-    component: AppComponent
+    component: HomeComponent,
+    pathMatch: 'full'
 };
 
 const fallback = {
@@ -17,7 +18,11 @@ const appRoutes: Routes = [
     index,
     {
         path: 'angular',
-        loadChildren: () => import('./angular/angular.module').then(mod => mod.AngularModule)
+        loadChildren: './angular/angular.module#AngularModule'
+    },
+    {
+      path: 'javascript',
+      loadChildren: './javascript/javascript.module#JavascriptModule'
     },
     fallback
 ];
@@ -31,6 +36,10 @@ const appRoutes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  declarations:[
+    HomeComponent,
+    PageNotFoundComponent
   ]
 })
 export class AppRoutingModule {}
